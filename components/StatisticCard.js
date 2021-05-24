@@ -12,7 +12,6 @@ export const StatisticCard = (props) => {
 
   const data = props.taskData;
   if (data.length === 0) return;
-  videoNumber = data.length;
   let count = 0;
   data.forEach((task) => {
     if (task["properties"]["任务状态"]["select"]["name"] !== "已完成") {
@@ -20,6 +19,7 @@ export const StatisticCard = (props) => {
     }
   });
   processingNumber = count;
+  videoNumber = data.length - processingNumber;
   let lastUpdateDay = data[0]["properties"]["发布日期"]["date"]["start"];
   sinceLastUpdateDays = Math.floor(
     (+new Date() - Date.parse(lastUpdateDay)) / (24 * 3600 * 1000)
