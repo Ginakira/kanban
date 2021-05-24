@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Statistic, Row, Col } from "antd";
 import {
   CalendarFilled,
@@ -7,26 +6,24 @@ import {
 } from "@ant-design/icons";
 
 export const StatisticCard = (props) => {
-  let [processingNumber, setProcessingNumber] = useState(0);
-  let [videoNumber, setVideoNumber] = useState(0);
-  let [sinceLastUpdateDays, setSinceLastUpdateDays] = useState(0);
+  let processingNumber = 0;
+  let videoNumber = 0;
+  let sinceLastUpdateDays = 0;
 
-  useEffect(() => {
-    const data = props.taskData;
-    if (data.length === 0) return;
-    setVideoNumber(data.length);
-    let count = 0;
-    data.forEach((task) => {
-      if (task["properties"]["任务状态"]["select"]["name"] !== "已完成") {
-        ++count;
-      }
-    });
-    setProcessingNumber(count);
-    let lastUpdateDay = data[0]["properties"]["发布日期"]["date"]["start"];
-    setSinceLastUpdateDays(
-      Math.floor((+new Date() - Date.parse(lastUpdateDay)) / (24 * 3600 * 1000))
-    );
-  }, [props.taskData]);
+  const data = props.taskData;
+  if (data.length === 0) return;
+  videoNumber = data.length;
+  let count = 0;
+  data.forEach((task) => {
+    if (task["properties"]["任务状态"]["select"]["name"] !== "已完成") {
+      ++count;
+    }
+  });
+  processingNumber = count;
+  let lastUpdateDay = data[0]["properties"]["发布日期"]["date"]["start"];
+  sinceLastUpdateDays = Math.floor(
+    (+new Date() - Date.parse(lastUpdateDay)) / (24 * 3600 * 1000)
+  );
 
   return (
     <>
