@@ -29,8 +29,8 @@ export const TaskCard = (props) => {
   const properties = props.taskData.properties;
 
   function getVideoUrl(property) {
-    if (property["text"].length !== 0) {
-      let bv_number = property["text"][0]["plain_text"];
+    if (property["rich_text"].length !== 0) {
+      let bv_number = property["rich_text"][0]["plain_text"];
       return (
         <Link
           href={`https://www.bilibili.com/video/${bv_number}/`}
@@ -46,8 +46,8 @@ export const TaskCard = (props) => {
 
   function getExeutorName(stepName) {
     try {
-      if (properties[stepName]["text"].length !== 0) {
-        return properties[stepName]["text"][0]["plain_text"];
+      if (properties[stepName]["rich_text"].length !== 0) {
+        return properties[stepName]["rich_text"][0]["plain_text"];
       } else {
         return "等待分配";
       }
@@ -153,7 +153,7 @@ export const TaskCard = (props) => {
         <Col span={12}>
           <Text>
             <FieldTimeOutlined />
-            时长：{properties["时长"]["text"][0]["plain_text"]}
+            时长：{properties["时长"]["rich_text"][0]["plain_text"]}
           </Text>
         </Col>
         <Col span={12}>
