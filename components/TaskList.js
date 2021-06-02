@@ -1,4 +1,4 @@
-import { Col, Divider, Row, Typography } from "antd";
+import { Col, Divider, Empty, Row, Typography } from "antd";
 import { TaskCard } from "./TaskCard";
 
 const { Title } = Typography;
@@ -16,14 +16,23 @@ export const TaskList = (props) => {
           </Divider>
         </Col>
       </Row>
-      <Row gutter={16}>
-        {props.taskData.map((task) => {
-          return (
-            <Col xl={12} md={24} key={task["id"]}>
-              <TaskCard taskData={task} />
-            </Col>
-          );
-        })}
+      <Row gutter={16} justify="center">
+        {props.taskData.length === 0 ? (
+          <Col>
+            <Empty
+              description="空无一物"
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+            />
+          </Col>
+        ) : (
+          props.taskData.map((task) => {
+            return (
+              <Col xl={12} md={24} key={task["id"]}>
+                <TaskCard taskData={task} />
+              </Col>
+            );
+          })
+        )}
       </Row>
     </>
   );
